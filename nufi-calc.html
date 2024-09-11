@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUFI CALCULATOR</title>
+    <!-- Include Google Fonts for the header -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"> -->
+    <style>
+        /* CSS for the Calculator */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        .calculator {
+            max-width: 450px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 10px 30px 30px 30px; /* Top padding reduced to 5px, left/right/bottom are 15px */
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+
+        .header {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 1px;
+            text-align: center;
+            color: #0d6535;
+            font-family: 'Great Vibes', cursive;
+            margin-top: 0;
+        }
+
+        .display {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: right;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #27a986;
+        }
+
+        .footer {
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: center;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer img {
+            width: 30px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <!-- Header for the calculator -->
+        <h1 class="header">NKǑ' SÁHWŪ</h1>
+
+        <!-- Display screen with default text -->
+        <div id="display" class="display" style="color: #808080;">...</div>
+
+
+        <!-- Calculator buttons -->
+        <div class="buttons">
+            <button onclick="handleButtonClick('Nshʉ̀')">Nshʉ̀'</button>
+            <button onclick="handleButtonClick('Pʉ́ɑ́')">Pʉ́ɑ́</button>
+            <button onclick="handleButtonClick('Tāā')">Tāā</button>
+            <button onclick="handleButtonClick('+')">+</button>
+
+            <button onclick="handleButtonClick('Kwɑ̀')">Kwɑ̀</button>
+            <button onclick="handleButtonClick('Tî')">Tî</button>
+            <button onclick="handleButtonClick('Ntòhō')">Ntòhō</button>
+            <button onclick="handleButtonClick('-')">-</button>
+
+            <button onclick="handleButtonClick('Sə̀ə̀mbʉ́ɑ́')">Sə̀ə̀mbʉ́ɑ́</button>
+            <button onclick="handleButtonClick('Hə̀ə̄')">Hə̀ə̄</button>
+            <button onclick="handleButtonClick('Vʉ̀ʉ̄')">Vʉ̀'ʉ̄</button>
+            <button onclick="handleButtonClick('*')">*</button>
+
+            <button onclick="handleButtonClick('C')">CWĀH</button>
+            <button onclick="handleButtonClick('Nèhē')">Nèhē</button>
+            <button onclick="handleButtonClick('=')">=</button>
+            <button onclick="handleButtonClick('/')">÷</button>
+        </div>
+
+        <!-- Footer with professional credits and logo -->
+        <div class="footer">
+            <!-- Replace src with a base64-encoded image or use a URL for the logo -->
+             
+            <img src="https://drive.google.com/open?id=1-OTajrQJmPahoKkdVS_tDSraRJcvN0W2&usp=drive_fs" alt="Resulam Logo" />
+            
+            <div>
+                © 2024 Resulam. Calculator designed by Shck Tchamna. <br>Visit us at <a href="https://www.resulam.com" target="_blank">www.resulam.com</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let display = "RESULAM.COM"; // Default text for the calculator display
+        let isFirstClick = true; // Flag to check if it's the first button click
+        let resultDisplayed = false; // Flag to check if the result is currently displayed
+    
+        // Mapping dictionary for custom text labels to numbers
+        const charToNumberMap = {
+            "Nshʉ̀": '1',
+            'Pʉ́ɑ́': '2',
+            'Tāā': '3',
+            'Kwɑ̀': '4',
+            'Tî': '5',
+            'Ntòhō': '6',
+            'Sə̀ə̀mbʉ́ɑ́': '7',
+            'Hə̀ə̄': '8',
+            "Vʉ̀'ʉ̄": '9',
+            'Nèhē': '0'
+        };
+    
+        // Function to handle button clicks
+        function handleButtonClick(value) {
+            const displayElement = document.getElementById('display'); // Get the display element
+            if (isFirstClick) {
+                display = '';
+                displayElement.style.color = '#000000'; // Set color to black on the first click
+                isFirstClick = false;
+            }
+    
+            if (value === 'C') {
+                display = "Pàtngʉ́ sáhwū...";
+                displayElement.style.color = '#808080'; // Reset color to grey for default text
+                isFirstClick = true;
+                resultDisplayed = false;
+            } else if (value === '=') {
+                try {
+                    let expression = display;
+                    for (const [key, val] of Object.entries(charToNumberMap)) {
+                        expression = expression.split(key).join(val);
+                    }
+    
+                    expression = expression.replace(/([+\-*/])\1+/g, '$1');
+                    expression = expression.replace(/([+\-*/])([+\-*/])/g, '$2');
+    
+                    const sanitizedDisplay = expression.replace(/[^0-9+\-*/.]/g, '');
+                    if (sanitizedDisplay.trim() === '') {
+                        display = 'Error';
+                    } else {
+                        display = eval(sanitizedDisplay).toString();
+                    }
+                    displayElement.style.color = '#000000'; // Ensure result text is black
+                    resultDisplayed = true;
+                } catch (e) {
+                    display = 'Error';
+                    displayElement.style.color = '#000000'; // Ensure error text is black
+                }
+            } else if (['+', '-', '*', '/'].includes(value)) {
+                if (!/[\+\-\*\/]$/.test(display)) {
+                    display += value;
+                    displayElement.style.color = '#000000'; // Ensure text color remains black
+                    resultDisplayed = false;
+                }
+            } else {
+                if (resultDisplayed) {
+                    display = '';
+                    resultDisplayed = false;
+                }
+                display += value;
+                displayElement.style.color = '#000000'; // Ensure text color is black for input
+            }
+            displayElement.textContent = display; // Update the display
+        }
+    </script>
+    
+</body>
+</html>
