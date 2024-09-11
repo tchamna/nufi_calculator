@@ -88,7 +88,12 @@
 		max-width: 450px;
 		width: 100%;
 		margin: 0 auto;
-		padding: 30px;
+		padding: 15px;
+    /* padding: 5px 15px 15px 15px; 
+    sets the padding in the order of 
+    top, right, bottom, and left: */
+    padding: 2px 30px 15px 30px; 
+    
 		border: 1px solid #ddd;
 		border-radius: 30px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -97,6 +102,8 @@
 		flex-direction: column;
 		align-items: center;
 	}
+
+  
 
 	.display {
 		width: 100%;
@@ -147,6 +154,10 @@
 </style>
 
 <div class="calculator">
+
+  <!-- Header for the calculator -->
+	<h3 class="header">NKǑ' SÁHWŪ</h3>
+
 	<!-- Display screen with default text -->
 	<div class="display">{display}</div>
 

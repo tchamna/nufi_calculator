@@ -35,6 +35,19 @@ h1 {
   line-height: 1.1;
 }
 
+/* Importing a fancy cursive font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.header {
+	font-size: 22px; /* Adjust font size as needed */
+	font-weight: bold;
+	margin-bottom: 5px; /* Space between the header and the display */
+	text-align: center;
+	color: #0d6535; /* Darker color for better visibility */
+	font-family: 'Great Vibes', cursive; /* Cursive and fancy font */
+}
+
+
 .card {
   padding: 2em;
 }
@@ -64,6 +77,8 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+
 
 @media (prefers-color-scheme: light) {
   :root {
